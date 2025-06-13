@@ -1,0 +1,69 @@
+target-version = "py313"
+src = ["."]
+exclude = ["config/**"]
+respect-gitignore = true
+line-length = 120
+indent-width = 4
+
+
+[format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+
+[lint]
+select = ["ALL"]
+ignore = [
+    # disable linters
+    "CPY",  # flake8-copyright
+    "D",  # pydocstyle
+    "DOC",  # pydoclint
+    # disable checks
+    "BLE001",  # blind-except
+    "G004",  # logging-f-string
+    "PLR0913",  # too-many-arguments
+    "RUF013",  # implicit-optional
+    "UP007",  # non-pep604-annotation
+]
+
+[lint.per-file-ignores]
+"__init__.py" = [
+    "F401",  # unused-import
+    "F403",  # undefined-local-with-import-star
+]
+"tests/**" = [
+    # disable linters
+    "ANN",  # flake8-annotations
+    "ARG",  # flake8-unused-arguments
+    "PL",  # pylint
+    "S",  # flake8-bandit
+    "SIM",  # flake8-simplify
+    "SLF",  # flake8-self
+    # disable checks
+    "FBT003",  # boolean-positional-value-in-call
+    "RUF001",  # ambiguous-unicode-character-string
+    "TC001",  # typing-only-first-party-import
+]
+"migrations/**" = [
+    "INP001",  # implicit namespace package
+]
+
+[lint.flake8-annotations]
+mypy-init-return = true
+
+[lint.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[lint.pep8-naming]
+classmethod-decorators = [
+    "pydantic.validator",
+    "declared_attr",
+    "directive",
+]
+
+[lint.isort]
+combine-as-imports = false
+
+[lint.pyupgrade]
+keep-runtime-typing = true
