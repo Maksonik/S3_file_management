@@ -1,0 +1,56 @@
+default_install_hook_types: [ pre-commit ]
+default_stages: [ pre-commit, manual ]
+repos:
+  - repo: local
+    hooks:
+      - id: check-toml
+        name: check-toml
+        entry: check-toml
+        types_or: [toml]
+        language: python
+      - id: check-yaml
+        name: check-yaml
+        entry: check-yaml
+        types_or: [yaml]
+        language: python
+        exclude: ".gitlab-ci.yml"
+      - id: check-json
+        name: check-json
+        entry: check-json
+        types_or: [json]
+        language: python
+      - id: check-merge-conflict
+        name: check-merge-conflict
+        entry: check-merge-conflict
+        language: python
+      - id: check-case-conflict
+        name: check-case-conflict
+        entry: check-case-conflict
+        language: python
+      - id: end-of-file-fixer
+        name: end-of-file-fixer
+        entry: end-of-file-fixer
+        types_or: [toml, yaml, json, python, c]
+        language: python
+      - id: trailing-whitespace-fixer
+        name: trailing-whitespace-fixer
+        entry: trailing-whitespace-fixer
+        types_or: [toml, yaml, json, python, c]
+        language: python
+      - id: ruff-format
+        name: ruff-format
+        entry: ruff
+        args:
+          - format
+          - --config=ruff-format.toml
+        types_or: [python]
+        language: python
+      - id: ruff
+        name: ruff
+        entry: ruff
+        args:
+          - check
+          - --fix
+          - --exit-non-zero-on-fix
+        types_or: [python]
+        language: system
