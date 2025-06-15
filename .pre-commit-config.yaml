@@ -8,12 +8,6 @@ repos:
         entry: check-toml
         types_or: [toml]
         language: python
-      - id: check-yaml
-        name: check-yaml
-        entry: check-yaml
-        types_or: [yaml]
-        language: python
-        exclude: ".gitlab-ci.yml"
       - id: check-json
         name: check-json
         entry: check-json

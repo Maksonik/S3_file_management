@@ -21,16 +21,16 @@ class S3AWSService(AbstractStorageService):
             aws_access_key_id=settings.AMAZON.ACCESS_KEY_ID,
             aws_secret_access_key=settings.AMAZON.SECRET_ACCESS_KEY,
         )
-        self.bucket = settings.AMAZON.BUCKET_NAME
+        self.bucket = settings.S3_BUCKET_NAME
         self.allowed_file_types = settings.ALLOWED_FILE_TYPES
 
     @async_cache(ttl=300)
     async def get_list_files(
         self,
         prefix: str,
-        max_keys: int,
+        max_keys: int = 10,
         *,
-        recursive: bool,
+        recursive: bool = False,
     ) -> ListFilesResponse:
         paginator = self.client.get_paginator("list_objects_v2")
         page_iterator = paginator.paginate(Bucket=self.bucket, Prefix=prefix, MaxKeys=max_keys)

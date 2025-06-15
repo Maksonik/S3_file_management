@@ -10,7 +10,6 @@ class AmazonSettings(BaseSettings):
 
     ACCESS_KEY_ID: str
     SECRET_ACCESS_KEY: str
-    BUCKET_NAME: str
     REGION_NAME: str = "eu-north-1"
 
 

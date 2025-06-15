@@ -1,0 +1,42 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+    method: GET
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/?list-type=2&prefix=test&max-keys=10&encoding-type=url
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>test-buket-maksonik</Name><Prefix>test</Prefix><KeyCount>0</KeyCount><MaxKeys>10</MaxKeys><EncodingType>url</EncodingType><IsTruncated>false</IsTruncated></ListBucketResult>'
+    headers:
+      Content-Type:
+      - application/xml
+      Date:
+      - Sun, 15 Jun 2025 15:14:47 GMT
+      Server:
+      - AmazonS3
+      Transfer-Encoding:
+      - chunked
+      x-amz-bucket-region:
+      - eu-north-1
+      x-amz-id-2:
+      - 3ACQnRtk5UFcuTyNJftPSRZ7BQN4NgfL2TksCG7WgB40Z5xAecGf/s9/kj8U6hFZJkYSTMWcRrKLWvzTFATvvYTUzIXmS73i
+      x-amz-request-id:
+      - 4M76TQ38VZHKDCKF
+    status:
+      code: 200
+      message: OK
+version: 1
