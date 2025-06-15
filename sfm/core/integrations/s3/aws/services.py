@@ -5,6 +5,7 @@ from fastapi import UploadFile
 from sfm.core.integrations.s3.base_service import AbstractStorageService
 from sfm.core.integrations.s3.schemas import FileResponse, FilesResponse
 from sfm.core.settings import Settings
+from sfm.core.utils.async_cache import async_cache
 
 
 class S3AWSService(AbstractStorageService):
@@ -18,6 +19,7 @@ class S3AWSService(AbstractStorageService):
         )
         self.bucket = settings.AMAZON.BUCKET_NAME
 
+    @async_cache(ttl=300)
     async def get_list_files(
         self,
         prefix: str,
