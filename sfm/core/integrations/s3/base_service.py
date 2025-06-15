@@ -1,9 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Any
 
 from fastapi import File
 
-from sfm.core.integrations.s3.schemas import FilesResponse
+from sfm.core.integrations.s3.schemas import DownloadLinkResponse, FilesResponse
 
 
 class AbstractStorageService(ABC):
@@ -25,7 +24,7 @@ class AbstractStorageService(ABC):
         """
 
     @abstractmethod
-    async def upload_file(self, prefix: str, file: File) -> Any:  # noqa: ANN401
+    async def upload_file(self, prefix: str, file: File) -> None:
         """
         Upload a file to the specified directory in the S3 bucket.
 
@@ -35,7 +34,7 @@ class AbstractStorageService(ABC):
         """
 
     @abstractmethod
-    async def delete_file(self, prefix: str, filename: str) -> Any:  # noqa: ANN401
+    async def delete_file(self, prefix: str, filename: str) -> None:
         """
         Delete a file from the specified directory in the S3 bucket.
 
@@ -45,7 +44,7 @@ class AbstractStorageService(ABC):
         """
 
     @abstractmethod
-    async def get_link_download_file(self, prefix: str, filename: str) -> Any:  # noqa: ANN401
+    async def get_link_download_file(self, prefix: str, filename: str) -> DownloadLinkResponse:
         """
         Generate a pre-signed temporary download link for a file.
 

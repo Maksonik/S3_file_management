@@ -1,10 +1,12 @@
 from typing import Annotated
 
 from fastapi import Depends, File, Path, Query, UploadFile
+from starlette.responses import HTMLResponse
+from starlette.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT
 
 from sfm.core.integrations.s3.aws.di import get_service
 from sfm.core.integrations.s3.base_service import AbstractStorageService
-from sfm.core.integrations.s3.schemas import FilesResponse
+from sfm.core.integrations.s3.schemas import DownloadLinkResponse, FilesResponse
 
 from .router import files_api_v1
 
@@ -28,34 +30,34 @@ async def get_link_download_file(
     service: Annotated[AbstractStorageService, Depends(get_service)],
     prefix: Annotated[str, Path(description="The prefix of the files to get")],
     filename: Annotated[str, Path(description="The name of the file to download")],
-) -> None:
+) -> DownloadLinkResponse:
     """
     Generates and returns a temporary download link for a file stored in S3.
     """
     return await service.get_link_download_file(prefix=prefix, filename=filename)
 
 
-@files_api_v1.post("/{prefix}", description="Upload a file")
+@files_api_v1.post("/{prefix}", description="Upload a file", status_code=HTTP_201_CREATED)
 async def upload_file(
     service: Annotated[AbstractStorageService, Depends(get_service)],
     prefix: Annotated[str, Path(description="The prefix of the files to get")],
     file: Annotated[UploadFile, File(description="The file to upload")],
-) -> dict:
+) -> HTMLResponse:
     """
     Uploads a file to the specified S3 directory. Validates the file type.
     """
     await service.upload_file(prefix=prefix, file=file)
-    return {"file_size": len(file.filename)}
+    return HTMLResponse(status_code=HTTP_201_CREATED)
 
 
-@files_api_v1.delete("/{prefix}/{filename}", description="Delete a file")
+@files_api_v1.delete("/{prefix}/{filename}", description="Delete a file", status_code=HTTP_204_NO_CONTENT)
 async def delete_file(
     service: Annotated[AbstractStorageService, Depends(get_service)],
     prefix: Annotated[str, Path(description="The prefix of the files to get")],
     filename: Annotated[str, Path(description="The name of the file to download")],
-) -> dict:
+) -> HTMLResponse:
     """
     Deletes a file from the specified prefix (folder) in the S3 bucket.
     """
     await service.delete_file(prefix=prefix, filename=filename)
-    return {"prefix": prefix, "filename": filename}
+    return HTMLResponse(status_code=HTTP_204_NO_CONTENT)

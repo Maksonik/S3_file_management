@@ -3,6 +3,11 @@ from datetime import datetime
 from pydantic import BaseModel, Field
 
 
+class DownloadLinkResponse(BaseModel):
+    download_url: str = Field(..., description="Pre-signed URL to download the file from S3")
+    expires_at: datetime = Field(..., description="Expiration time of the URL in ISO 8601 format (UTC)")
+
+
 class FileResponse(BaseModel):
     name: str = Field(..., description="Full key (path) of the file in the S3 bucket")
     size: int = Field(..., description="Size of the file in bytes")
