@@ -6,9 +6,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class AmazonSettings(BaseSettings):
     model_config = SettingsConfigDict(case_sensitive=True, env_prefix="AMAZON_", extra="ignore")
 
-    ACCESS_KEY_ID: str = ""
-    SECRET_ACCESS_KEY: str = ""
-    BUCKET_NAME: str = ""
+    ACCESS_KEY_ID: str
+    SECRET_ACCESS_KEY: str
+    BUCKET_NAME: str
+    REGION_NAME: str = "eu-north-1"
 
 
 class Settings(BaseSettings):
