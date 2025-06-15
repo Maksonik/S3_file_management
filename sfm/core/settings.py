@@ -4,6 +4,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class AmazonSettings(BaseSettings):
+    """Amazon integration settings"""
+
     model_config = SettingsConfigDict(case_sensitive=True, env_prefix="AMAZON_", extra="ignore")
 
     ACCESS_KEY_ID: str

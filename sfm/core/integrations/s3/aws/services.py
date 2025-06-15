@@ -2,8 +2,8 @@ import boto3
 from botocore.config import Config
 from fastapi import UploadFile
 
-from sfm.core.integrations.s3.aws.schemas import FileResponse, FilesResponse
 from sfm.core.integrations.s3.base_service import AbstractStorageService
+from sfm.core.integrations.s3.schemas import FileResponse, FilesResponse
 from sfm.core.settings import Settings
 
 
