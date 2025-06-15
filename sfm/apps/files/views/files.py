@@ -1,12 +1,12 @@
 from typing import Annotated
 
 from fastapi import Depends, File, Path, Query, UploadFile
-from starlette.responses import HTMLResponse
+from starlette.responses import HTMLResponse, Response
 from starlette.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT
 
 from sfm.core.integrations.s3.aws.di import get_service
 from sfm.core.integrations.s3.base_service import AbstractStorageService
-from sfm.core.integrations.s3.schemas import DownloadLinkResponse, FilesResponse
+from sfm.core.integrations.s3.schemas import DownloadLinkResponse, ListFilesResponse
 
 from .router import files_api_v1
 
@@ -18,7 +18,7 @@ async def get_files(
     max_keys: Annotated[int, Query(description="The maximum number of files to get")] = 10,
     *,
     recursive: Annotated[bool, Query(description="Get files recursively")] = False,
-) -> FilesResponse:
+) -> ListFilesResponse:
     """
     Returns a list of files located under the specified prefix in the S3 bucket.
     """
@@ -37,7 +37,7 @@ async def get_link_download_file(
     return await service.get_link_download_file(prefix=prefix, filename=filename)
 
 
-@files_api_v1.post("/{prefix}", description="Upload a file", status_code=HTTP_201_CREATED)
+@files_api_v1.post("/{prefix}", description="Upload a file", status_code=HTTP_201_CREATED, response_class=Response)
 async def upload_file(
     service: Annotated[AbstractStorageService, Depends(get_service)],
     prefix: Annotated[str, Path(description="The prefix of the files to get")],

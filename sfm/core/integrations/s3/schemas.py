@@ -15,7 +15,7 @@ class FileResponse(BaseModel):
     type: str = Field(..., description="File type based on the extension (e.g., pdf, txt)")
 
 
-class FilesResponse(BaseModel):
+class ListFilesResponse(BaseModel):
     files: list[FileResponse] = Field(..., description="List of files found under the prefix")
     is_truncated: bool = Field(..., description="True if not all results are returned (pagination)")
     next_marker: str | None = Field(None, description="Pagination marker for the next page if truncated")

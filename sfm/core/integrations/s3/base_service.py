@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from fastapi import File
 
-from sfm.core.integrations.s3.schemas import DownloadLinkResponse, FilesResponse
+from sfm.core.integrations.s3.schemas import DownloadLinkResponse, ListFilesResponse
 
 
 class AbstractStorageService(ABC):
@@ -13,7 +13,7 @@ class AbstractStorageService(ABC):
         max_keys: int,
         *,
         recursive: bool,
-    ) -> FilesResponse:
+    ) -> ListFilesResponse:
         """
         Get a list of files from the S3 bucket with the given prefix.
 
