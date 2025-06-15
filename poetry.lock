@@ -18,7 +18,7 @@ version = "4.9.0"
 description = "High level compatibility layer for multiple asynchronous event loop implementations"
 optional = false
 python-versions = ">=3.9"
-groups = ["main"]
+groups = ["main", "dev"]
 files = [
     {file = "anyio-4.9.0-py3-none-any.whl", hash = "sha256:9f76d541cad6e36af7beb62e978876f3b41e3e04f2c1fbf0884604c0a9c4d93c"},
     {file = "anyio-4.9.0.tar.gz", hash = "sha256:673c0c244e15788651a4ff38710fea9675823028a6f08a5eda409e0c9840a028"},
@@ -73,6 +73,18 @@ urllib3 = {version = ">=1.25.4,<2.2.0 || >2.2.0,<3", markers = "python_version >
 
 [package.extras]
 crt = ["awscrt (==0.23.8)"]
+
+[[package]]
+name = "certifi"
+version = "2025.6.15"
+description = "Python package for providing Mozilla's CA Bundle."
+optional = false
+python-versions = ">=3.7"
+groups = ["dev"]
+files = [
+    {file = "certifi-2025.6.15-py3-none-any.whl", hash = "sha256:2e0c7ce7cb5d8f8634ca55d2ba7e6ec2689a2fd6537d8dec1296a477a4910057"},
+    {file = "certifi-2025.6.15.tar.gz", hash = "sha256:d747aa5a8b9bbbb1bb8c22bb13e22bd1f18e9796defa16bab421f7f7a317323b"},
+]
 
 [[package]]
 name = "cfgv"
@@ -250,11 +262,58 @@ version = "0.16.0"
 description = "A pure-Python, bring-your-own-I/O implementation of HTTP/1.1"
 optional = false
 python-versions = ">=3.8"
-groups = ["main"]
+groups = ["main", "dev"]
 files = [
     {file = "h11-0.16.0-py3-none-any.whl", hash = "sha256:63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86"},
     {file = "h11-0.16.0.tar.gz", hash = "sha256:4e35b956cf45792e4caa5885e69fba00bdbc6ffafbfa020300e549b208ee5ff1"},
 ]
+
+[[package]]
+name = "httpcore"
+version = "1.0.9"
+description = "A minimal low-level HTTP client."
+optional = false
+python-versions = ">=3.8"
+groups = ["dev"]
+files = [
+    {file = "httpcore-1.0.9-py3-none-any.whl", hash = "sha256:2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55"},
+    {file = "httpcore-1.0.9.tar.gz", hash = "sha256:6e34463af53fd2ab5d807f399a9b45ea31c3dfa2276f15a2c3f00afff6e176e8"},
+]
+
+[package.dependencies]
+certifi = "*"
+h11 = ">=0.16"
+
+[package.extras]
+asyncio = ["anyio (>=4.0,<5.0)"]
+http2 = ["h2 (>=3,<5)"]
+socks = ["socksio (==1.*)"]
+trio = ["trio (>=0.22.0,<1.0)"]
+
+[[package]]
+name = "httpx"
+version = "0.28.1"
+description = "The next generation HTTP client."
+optional = false
+python-versions = ">=3.8"
+groups = ["dev"]
+files = [
+    {file = "httpx-0.28.1-py3-none-any.whl", hash = "sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad"},
+    {file = "httpx-0.28.1.tar.gz", hash = "sha256:75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc"},
+]
+
+[package.dependencies]
+anyio = "*"
+certifi = "*"
+httpcore = "==1.*"
+idna = "*"
+
+[package.extras]
+brotli = ["brotli ; platform_python_implementation == \"CPython\"", "brotlicffi ; platform_python_implementation != \"CPython\""]
+cli = ["click (==8.*)", "pygments (==2.*)", "rich (>=10,<14)"]
+http2 = ["h2 (>=3,<5)"]
+socks = ["socksio (==1.*)"]
+zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "identify"
@@ -819,6 +878,25 @@ pygments = ">=2.7.2"
 dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "requests", "setuptools", "xmlschema"]
 
 [[package]]
+name = "pytest-asyncio"
+version = "1.0.0"
+description = "Pytest support for asyncio"
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "pytest_asyncio-1.0.0-py3-none-any.whl", hash = "sha256:4f024da9f1ef945e680dc68610b52550e36590a67fd31bb3b4943979a1f90ef3"},
+    {file = "pytest_asyncio-1.0.0.tar.gz", hash = "sha256:d15463d13f4456e1ead2594520216b225a16f781e144f8fdf6c5bb4667c48b3f"},
+]
+
+[package.dependencies]
+pytest = ">=8.2,<9"
+
+[package.extras]
+docs = ["sphinx (>=5.3)", "sphinx-rtd-theme (>=1)"]
+testing = ["coverage (>=6.2)", "hypothesis (>=5.7.1)"]
+
+[[package]]
 name = "pytest-cov"
 version = "6.2.1"
 description = "Pytest plugin for measuring coverage."
@@ -1133,7 +1211,7 @@ version = "1.3.1"
 description = "Sniff out which async library your code is running under"
 optional = false
 python-versions = ">=3.7"
-groups = ["main"]
+groups = ["main", "dev"]
 files = [
     {file = "sniffio-1.3.1-py3-none-any.whl", hash = "sha256:2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2"},
     {file = "sniffio-1.3.1.tar.gz", hash = "sha256:f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc"},
@@ -1163,11 +1241,12 @@ version = "4.14.0"
 description = "Backported and Experimental Type Hints for Python 3.9+"
 optional = false
 python-versions = ">=3.9"
-groups = ["main"]
+groups = ["main", "dev"]
 files = [
     {file = "typing_extensions-4.14.0-py3-none-any.whl", hash = "sha256:a1514509136dd0b477638fc68d6a91497af5076466ad0fa6c338e44e359944af"},
     {file = "typing_extensions-4.14.0.tar.gz", hash = "sha256:8676b788e32f02ab42d9e7c61324048ae4c6d844a399eebace3d4979d75ceef4"},
 ]
+markers = {dev = "python_version == \"3.12\""}
 
 [[package]]
 name = "typing-inspection"
@@ -1186,16 +1265,34 @@ typing-extensions = ">=4.12.0"
 
 [[package]]
 name = "urllib3"
+version = "1.26.20"
+description = "HTTP library with thread-safe connection pooling, file post, and more."
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,>=2.7"
+groups = ["main", "dev"]
+markers = "platform_python_implementation == \"PyPy\""
+files = [
+    {file = "urllib3-1.26.20-py2.py3-none-any.whl", hash = "sha256:0ed14ccfbf1c30a9072c7ca157e4319b70d65f623e91e7b32fadb2853431016e"},
+    {file = "urllib3-1.26.20.tar.gz", hash = "sha256:40c2dc0c681e47eb8f90e7e27bf6ff7df2e677421fd46756da1161c39ca70d32"},
+]
+
+[package.extras]
+brotli = ["brotli (==1.0.9) ; os_name != \"nt\" and python_version < \"3\" and platform_python_implementation == \"CPython\"", "brotli (>=1.0.9) ; python_version >= \"3\" and platform_python_implementation == \"CPython\"", "brotlicffi (>=0.8.0) ; (os_name != \"nt\" or python_version >= \"3\") and platform_python_implementation != \"CPython\"", "brotlipy (>=0.6.0) ; os_name == \"nt\" and python_version < \"3\""]
+secure = ["certifi", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "ipaddress ; python_version == \"2.7\"", "pyOpenSSL (>=0.14)", "urllib3-secure-extra"]
+socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
+
+[[package]]
+name = "urllib3"
 version = "2.4.0"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
 python-versions = ">=3.9"
 groups = ["main", "dev"]
+markers = "platform_python_implementation != \"PyPy\""
 files = [
     {file = "urllib3-2.4.0-py3-none-any.whl", hash = "sha256:4e16665048960a0900c702d4a66415956a584919c03361cac9f1df5c5dd7e813"},
     {file = "urllib3-2.4.0.tar.gz", hash = "sha256:414bc6535b787febd7567804cc015fee39daab8ad86268f1310a9250697de466"},
 ]
-markers = {dev = "platform_python_implementation != \"PyPy\""}
 
 [package.extras]
 brotli = ["brotli (>=1.0.9) ; platform_python_implementation == \"CPython\"", "brotlicffi (>=0.8.0) ; platform_python_implementation != \"CPython\""]
@@ -1224,30 +1321,11 @@ standard = ["colorama (>=0.4) ; sys_platform == \"win32\"", "httptools (>=0.6.3)
 
 [[package]]
 name = "vcrpy"
-version = "5.1.0"
-description = "Automatically mock your HTTP interactions to simplify and speed up testing"
-optional = false
-python-versions = ">=3.8"
-groups = ["dev"]
-markers = "platform_python_implementation == \"PyPy\""
-files = [
-    {file = "vcrpy-5.1.0-py2.py3-none-any.whl", hash = "sha256:605e7b7a63dcd940db1df3ab2697ca7faf0e835c0852882142bafb19649d599e"},
-    {file = "vcrpy-5.1.0.tar.gz", hash = "sha256:bbf1532f2618a04f11bce2a99af3a9647a32c880957293ff91e0a5f187b6b3d2"},
-]
-
-[package.dependencies]
-PyYAML = "*"
-wrapt = "*"
-yarl = "*"
-
-[[package]]
-name = "vcrpy"
 version = "7.0.0"
 description = "Automatically mock your HTTP interactions to simplify and speed up testing"
 optional = false
 python-versions = ">=3.9"
 groups = ["dev"]
-markers = "platform_python_implementation != \"PyPy\""
 files = [
     {file = "vcrpy-7.0.0-py2.py3-none-any.whl", hash = "sha256:55791e26c18daa363435054d8b35bd41a4ac441b6676167635d1b37a71dbe124"},
     {file = "vcrpy-7.0.0.tar.gz", hash = "sha256:176391ad0425edde1680c5b20738ea3dc7fb942520a48d2993448050986b3a50"},
@@ -1255,7 +1333,10 @@ files = [
 
 [package.dependencies]
 PyYAML = "*"
-urllib3 = {version = "*", markers = "platform_python_implementation != \"PyPy\" and python_version >= \"3.10\""}
+urllib3 = [
+    {version = "<2", markers = "platform_python_implementation == \"PyPy\""},
+    {version = "*", markers = "platform_python_implementation != \"PyPy\" and python_version >= \"3.10\""},
+]
 wrapt = "*"
 yarl = "*"
 
@@ -1494,4 +1575,4 @@ propcache = ">=0.2.1"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "542d093c384385fd192a0485eea18dfb265aae356650fb60209b3a506c565dc8"
+content-hash = "1b18be2ad8f4c0e8d4ab80261da7819e25b1f82a0e1911d7bb706c38d5443275"
