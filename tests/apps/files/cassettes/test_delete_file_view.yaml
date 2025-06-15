@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+    method: DELETE
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/tests/test.txt
+  response:
+    body:
+      string: ''
+    headers:
+      Date:
+      - Sun, 15 Jun 2025 16:23:40 GMT
+      Server:
+      - AmazonS3
+      x-amz-id-2:
+      - exY0UFTa/UteUUH7xUguUDceNPkvzJiKwdYBSzqE1DW6Qdz3JgEOeSEGET/f0gWqkIBjvSJGHVuU//la6fFYMZWitgqh3Wgg
+      x-amz-request-id:
+      - 0B6D204BMJFQZP9T
+    status:
+      code: 204
+      message: No Content
+version: 1

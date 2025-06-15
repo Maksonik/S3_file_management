@@ -2,6 +2,8 @@ import logging
 
 import pytest
 
+from tests.constants import TESTSERVER_HOST
+
 
 @pytest.fixture(scope="session")
 def vcr_config():
@@ -12,6 +14,7 @@ def vcr_config():
 
     return {
         "record_mode": "none",
+        "ignore_hosts": [TESTSERVER_HOST],
         "filter_headers": [
             ("authorization", "DUMMY"),
             ("User-Agent", "User-Agent"),
