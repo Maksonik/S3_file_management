@@ -39,7 +39,7 @@ class S3AWSService(AbstractStorageService):
         files = []
         for item in page.get("Contents", []):
             obj_path = item["Key"].strip("/")
-            if recursive and f"{prefix}/{obj_path.split('/')[-1]}" != obj_path:
+            if not recursive and f"{prefix}/{obj_path.split('/')[-1]}" != obj_path:
                 continue
             files.append(
                 FileResponse(

@@ -1,11 +1,15 @@
 import pytest
 
 from sfm.core.permissions.rate_limiter import _request_logs
+from sfm.core.utils import async_cache
 
 
-@pytest.fixture(autouse=True)
-def clear_test_dir_from_3s_aws(aws_service):
-    aws_service.delete_file(prefix="", filename="test")
+@pytest.fixture
+def disable_cache():
+    original_value = async_cache.USE_CACHE
+    async_cache.USE_CACHE = False
+    yield
+    async_cache.USE_CACHE = original_value
 
 
 @pytest.fixture(autouse=True)

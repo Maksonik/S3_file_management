@@ -1,5 +1,70 @@
 interactions:
 - request:
+    body: !!python/object/new:_io.BytesIO
+      state: !!python/tuple
+      - !!binary |
+        NA0KZGF0YQ0KMA0KeC1hbXotY2hlY2tzdW0tY3JjMzI6cmZQell3PT0NCg0K
+      - 0
+      - null
+    headers:
+      Content-Encoding:
+      - !!binary |
+        YXdzLWNodW5rZWQ=
+      Expect:
+      - !!binary |
+        MTAwLWNvbnRpbnVl
+      Transfer-Encoding:
+      - !!binary |
+        Y2h1bmtlZA==
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      X-Amz-Decoded-Content-Length:
+      - !!binary |
+        NA==
+      X-Amz-Trailer:
+      - !!binary |
+        eC1hbXotY2hlY2tzdW0tY3JjMzI=
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+      x-amz-sdk-checksum-algorithm:
+      - !!binary |
+        Q1JDMzI=
+    method: PUT
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/test/deleting_file.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      Date:
+      - Mon, 16 Jun 2025 04:07:27 GMT
+      ETag:
+      - '"8d777f385d3dfec8815d20f7496026dc"'
+      Server:
+      - AmazonS3
+      x-amz-checksum-crc32:
+      - rfPzYw==
+      x-amz-checksum-type:
+      - FULL_OBJECT
+      x-amz-id-2:
+      - mUc1dd+aO8pORNNitADRlTfLRu3DykVnFAVbe9ET5acvOCE2NdT9s9ozuNyWxGSRwRW6diM1o0gcyaCXC8iFlQwlsVV6ecFh
+      x-amz-request-id:
+      - 2B69HJTD41076VB2
+      x-amz-server-side-encryption:
+      - AES256
+    status:
+      code: 200
+      message: OK
+- request:
     body: null
     headers:
       Content-Length:
@@ -17,19 +82,19 @@ interactions:
       authorization:
       - DUMMY
     method: DELETE
-    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/test/test
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/test/deleting_file.jpg
   response:
     body:
       string: ''
     headers:
       Date:
-      - Sun, 15 Jun 2025 15:20:58 GMT
+      - Mon, 16 Jun 2025 04:07:27 GMT
       Server:
       - AmazonS3
       x-amz-id-2:
-      - ZY8vyLJEyawhFLIzdMJceJxcM2VFVHPs5llY7q/qKgmchJU13MbzpIcVQOq4wfg8isL/e9mX6yY=
+      - q25U2RF0M0HYTfji9Ru4aaW7TkJn5JbkYqdyzDmcLXljSc33+MjcuhozfuNIYTPZMNJKWH0kDFWyXAQwUBezF+WcEgvk8tW4
       x-amz-request-id:
-      - JPBR1AZQCJEVYF5A
+      - 2B64YCKETZW2XTGA
     status:
       code: 204
       message: No Content

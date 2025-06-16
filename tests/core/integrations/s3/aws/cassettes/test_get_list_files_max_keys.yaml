@@ -1,0 +1,459 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+    method: GET
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/?list-type=2&prefix=test&max-keys=10&encoding-type=url
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>test-buket-maksonik</Name><Prefix>test</Prefix><KeyCount>0</KeyCount><MaxKeys>10</MaxKeys><EncodingType>url</EncodingType><IsTruncated>false</IsTruncated></ListBucketResult>'
+    headers:
+      Content-Type:
+      - application/xml
+      Date:
+      - Mon, 16 Jun 2025 04:12:46 GMT
+      Server:
+      - AmazonS3
+      Transfer-Encoding:
+      - chunked
+      x-amz-bucket-region:
+      - eu-north-1
+      x-amz-id-2:
+      - 0m03V0hSu7Q5ASZyGnYZoqebpJNodXvetMKZbroeBDEG8ElxUQzoTHi0RqM0dvoPnNHm4v9M/qM=
+      x-amz-request-id:
+      - 0BMBQA0AK3QDKQJF
+    status:
+      code: 200
+      message: OK
+- request:
+    body: !!python/object/new:_io.BytesIO
+      state: !!python/tuple
+      - !!binary |
+        NA0KZGF0YQ0KMA0KeC1hbXotY2hlY2tzdW0tY3JjMzI6cmZQell3PT0NCg0K
+      - 0
+      - null
+    headers:
+      Content-Encoding:
+      - !!binary |
+        YXdzLWNodW5rZWQ=
+      Expect:
+      - !!binary |
+        MTAwLWNvbnRpbnVl
+      Transfer-Encoding:
+      - !!binary |
+        Y2h1bmtlZA==
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      X-Amz-Decoded-Content-Length:
+      - !!binary |
+        NA==
+      X-Amz-Trailer:
+      - !!binary |
+        eC1hbXotY2hlY2tzdW0tY3JjMzI=
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+      x-amz-sdk-checksum-algorithm:
+      - !!binary |
+        Q1JDMzI=
+    method: PUT
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/test/0_max_keys_file.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      Date:
+      - Mon, 16 Jun 2025 04:12:46 GMT
+      ETag:
+      - '"8d777f385d3dfec8815d20f7496026dc"'
+      Server:
+      - AmazonS3
+      x-amz-checksum-crc32:
+      - rfPzYw==
+      x-amz-checksum-type:
+      - FULL_OBJECT
+      x-amz-id-2:
+      - TUXelnwBKBBFt2E4HdsBA18d6AgJY4hiG2rAln5VuiJtYvsDTH9ql83LRBl91VkRk1Pqj8yaatY=
+      x-amz-request-id:
+      - 0BM6N3JBHK75WQ0V
+      x-amz-server-side-encryption:
+      - AES256
+    status:
+      code: 200
+      message: OK
+- request:
+    body: !!python/object/new:_io.BytesIO
+      state: !!python/tuple
+      - !!binary |
+        NA0KZGF0YQ0KMA0KeC1hbXotY2hlY2tzdW0tY3JjMzI6cmZQell3PT0NCg0K
+      - 0
+      - null
+    headers:
+      Content-Encoding:
+      - !!binary |
+        YXdzLWNodW5rZWQ=
+      Expect:
+      - !!binary |
+        MTAwLWNvbnRpbnVl
+      Transfer-Encoding:
+      - !!binary |
+        Y2h1bmtlZA==
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      X-Amz-Decoded-Content-Length:
+      - !!binary |
+        NA==
+      X-Amz-Trailer:
+      - !!binary |
+        eC1hbXotY2hlY2tzdW0tY3JjMzI=
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+      x-amz-sdk-checksum-algorithm:
+      - !!binary |
+        Q1JDMzI=
+    method: PUT
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/test/1_max_keys_file.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      Date:
+      - Mon, 16 Jun 2025 04:12:46 GMT
+      ETag:
+      - '"8d777f385d3dfec8815d20f7496026dc"'
+      Server:
+      - AmazonS3
+      x-amz-checksum-crc32:
+      - rfPzYw==
+      x-amz-checksum-type:
+      - FULL_OBJECT
+      x-amz-id-2:
+      - 5kqSRyOet7tUXKV5MgtaKZvrGANiDR3wf3X8zJiT9edtlAx2z/SugWVJsIGc0I36Rs9HC9SlziU=
+      x-amz-request-id:
+      - 0BM844H9ARJEV2WR
+      x-amz-server-side-encryption:
+      - AES256
+    status:
+      code: 200
+      message: OK
+- request:
+    body: !!python/object/new:_io.BytesIO
+      state: !!python/tuple
+      - !!binary |
+        NA0KZGF0YQ0KMA0KeC1hbXotY2hlY2tzdW0tY3JjMzI6cmZQell3PT0NCg0K
+      - 0
+      - null
+    headers:
+      Content-Encoding:
+      - !!binary |
+        YXdzLWNodW5rZWQ=
+      Expect:
+      - !!binary |
+        MTAwLWNvbnRpbnVl
+      Transfer-Encoding:
+      - !!binary |
+        Y2h1bmtlZA==
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      X-Amz-Decoded-Content-Length:
+      - !!binary |
+        NA==
+      X-Amz-Trailer:
+      - !!binary |
+        eC1hbXotY2hlY2tzdW0tY3JjMzI=
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+      x-amz-sdk-checksum-algorithm:
+      - !!binary |
+        Q1JDMzI=
+    method: PUT
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/test/2_max_keys_file.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      Date:
+      - Mon, 16 Jun 2025 04:12:46 GMT
+      ETag:
+      - '"8d777f385d3dfec8815d20f7496026dc"'
+      Server:
+      - AmazonS3
+      x-amz-checksum-crc32:
+      - rfPzYw==
+      x-amz-checksum-type:
+      - FULL_OBJECT
+      x-amz-id-2:
+      - LKnKb3P+vt3ZVz+CX3qN3aiFLMTwwdBTVWdF1YJQSxPmYPQqhQP1Zyfa8ijOQ2ZOAztk5RqmQVw=
+      x-amz-request-id:
+      - 0BM98D71GNEHC6R3
+      x-amz-server-side-encryption:
+      - AES256
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+    method: GET
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/?list-type=2&prefix=test&max-keys=1&encoding-type=url
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>test-buket-maksonik</Name><Prefix>test</Prefix><NextContinuationToken>12S42tpDHSbW3mFlPHlXaGoF9GzL8jLfesU+Fk1ByQH2Eg0YdB32wuOjkYUK0HYKa9obDTaB0kkU=</NextContinuationToken><KeyCount>1</KeyCount><MaxKeys>1</MaxKeys><EncodingType>url</EncodingType><IsTruncated>true</IsTruncated><Contents><Key>test/0_max_keys_file.jpg</Key><LastModified>2025-06-16T04:12:46.000Z</LastModified><ETag>&quot;8d777f385d3dfec8815d20f7496026dc&quot;</ETag><ChecksumAlgorithm>CRC32</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4</Size><StorageClass>STANDARD</StorageClass></Contents></ListBucketResult>'
+    headers:
+      Content-Type:
+      - application/xml
+      Date:
+      - Mon, 16 Jun 2025 04:12:47 GMT
+      Server:
+      - AmazonS3
+      Transfer-Encoding:
+      - chunked
+      x-amz-bucket-region:
+      - eu-north-1
+      x-amz-id-2:
+      - v6h/RMhMCjyJI7oji3DF1V5gpzyP6g66Nyg0uY6eA4/n3ONwKfcaVBA3VB/pBoCi/sXPEHkQFCs=
+      x-amz-request-id:
+      - 3KYXRNDTJV1TB868
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+    method: GET
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/?list-type=2&prefix=test&max-keys=10&encoding-type=url
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>test-buket-maksonik</Name><Prefix>test</Prefix><KeyCount>3</KeyCount><MaxKeys>10</MaxKeys><EncodingType>url</EncodingType><IsTruncated>false</IsTruncated><Contents><Key>test/0_max_keys_file.jpg</Key><LastModified>2025-06-16T04:12:46.000Z</LastModified><ETag>&quot;8d777f385d3dfec8815d20f7496026dc&quot;</ETag><ChecksumAlgorithm>CRC32</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>test/1_max_keys_file.jpg</Key><LastModified>2025-06-16T04:12:46.000Z</LastModified><ETag>&quot;8d777f385d3dfec8815d20f7496026dc&quot;</ETag><ChecksumAlgorithm>CRC32</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>test/2_max_keys_file.jpg</Key><LastModified>2025-06-16T04:12:46.000Z</LastModified><ETag>&quot;8d777f385d3dfec8815d20f7496026dc&quot;</ETag><ChecksumAlgorithm>CRC32</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4</Size><StorageClass>STANDARD</StorageClass></Contents></ListBucketResult>'
+    headers:
+      Content-Type:
+      - application/xml
+      Date:
+      - Mon, 16 Jun 2025 04:12:47 GMT
+      Server:
+      - AmazonS3
+      Transfer-Encoding:
+      - chunked
+      x-amz-bucket-region:
+      - eu-north-1
+      x-amz-id-2:
+      - akdUkz0FsgESKPLxIeNSIejXzcu6WKcWaS09M3wAUZCooa7HyQTYmYDaR9n3QHjF4poAxqyHd8I=
+      x-amz-request-id:
+      - 3KYZG7T91QYSXBBZ
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+    method: GET
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/?list-type=2&prefix=test&max-keys=10&encoding-type=url
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>test-buket-maksonik</Name><Prefix>test</Prefix><KeyCount>3</KeyCount><MaxKeys>10</MaxKeys><EncodingType>url</EncodingType><IsTruncated>false</IsTruncated><Contents><Key>test/0_max_keys_file.jpg</Key><LastModified>2025-06-16T04:12:46.000Z</LastModified><ETag>&quot;8d777f385d3dfec8815d20f7496026dc&quot;</ETag><ChecksumAlgorithm>CRC32</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>test/1_max_keys_file.jpg</Key><LastModified>2025-06-16T04:12:46.000Z</LastModified><ETag>&quot;8d777f385d3dfec8815d20f7496026dc&quot;</ETag><ChecksumAlgorithm>CRC32</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>test/2_max_keys_file.jpg</Key><LastModified>2025-06-16T04:12:46.000Z</LastModified><ETag>&quot;8d777f385d3dfec8815d20f7496026dc&quot;</ETag><ChecksumAlgorithm>CRC32</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4</Size><StorageClass>STANDARD</StorageClass></Contents></ListBucketResult>'
+    headers:
+      Content-Type:
+      - application/xml
+      Date:
+      - Mon, 16 Jun 2025 04:12:48 GMT
+      Server:
+      - AmazonS3
+      Transfer-Encoding:
+      - chunked
+      x-amz-bucket-region:
+      - eu-north-1
+      x-amz-id-2:
+      - x4YT7BqgFwd/a5WGzyB5EXpETV0+n1pirYDkiwdcZvxrBzcLMg3VgzeYJuDKdTzrU5L0vFX1owc=
+      x-amz-request-id:
+      - K4WYBRNJ39WG2BRJ
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+    method: DELETE
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/0_max_keys_file.jpg/test
+  response:
+    body:
+      string: ''
+    headers:
+      Date:
+      - Mon, 16 Jun 2025 04:12:48 GMT
+      Server:
+      - AmazonS3
+      x-amz-id-2:
+      - PLo+J0XTWZL74Yoe2jzOx4EN27K/S2STqGp84Ak0YPEBewO75xbZDmYITWgRC9AT13BhX46+q0Q=
+      x-amz-request-id:
+      - K4WVBC19YC6JTMCM
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: null
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+    method: DELETE
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/1_max_keys_file.jpg/test
+  response:
+    body:
+      string: ''
+    headers:
+      Date:
+      - Mon, 16 Jun 2025 04:12:48 GMT
+      Server:
+      - AmazonS3
+      x-amz-id-2:
+      - y/DfeTL7AaDWLWwVkwXvJlXkZbRe0IMD5C1psSGx5Y9bbEflczR6I+tz5NHH4PE+lRoraDPr7hM=
+      x-amz-request-id:
+      - K4WMT3D8031QJ2XR
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: null
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+    method: DELETE
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/2_max_keys_file.jpg/test
+  response:
+    body:
+      string: ''
+    headers:
+      Date:
+      - Mon, 16 Jun 2025 04:12:48 GMT
+      Server:
+      - AmazonS3
+      x-amz-id-2:
+      - u2bFxSSUPPPiIb+lcoxiqVmoWjzmm2r1FTuBQhLGkQ033thku9ddlVLr8tyUgQ39x06hTp8jVQg=
+      x-amz-request-id:
+      - K4WMWJRWDNDS9SQD
+    status:
+      code: 204
+      message: No Content
+version: 1

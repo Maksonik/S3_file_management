@@ -6,6 +6,8 @@ from collections import OrderedDict
 from collections.abc import Callable
 from typing import Any, ParamSpecArgs, ParamSpecKwargs
 
+USE_CACHE = True
+
 
 def hash_args_kwargs(*args: ParamSpecArgs, **kwargs: ParamSpecKwargs) -> int:
     try:
@@ -25,6 +27,9 @@ def async_cache(ttl: int = None, max_size: int = 20) -> Callable:
 
         @functools.wraps(func)
         async def wrapper(*args: ParamSpecArgs, **kwargs: ParamSpecKwargs) -> Any:  # noqa: ANN401
+            if not USE_CACHE:
+                return await func(*args, **kwargs)
+
             is_method = (
                 len(args) > 0
                 and hasattr(args[0], func.__name__)
