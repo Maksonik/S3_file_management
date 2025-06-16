@@ -1,0 +1,67 @@
+interactions:
+- request:
+    body: !!python/object/new:_io.BytesIO
+      state: !!python/tuple
+      - !!binary |
+        Yg0Kc2FtcGxlIGRhdGENCjANCngtYW16LWNoZWNrc3VtLWNyYzMyOmFrZW1NQT09DQoNCg==
+      - 0
+      - null
+    headers:
+      Content-Encoding:
+      - !!binary |
+        YXdzLWNodW5rZWQ=
+      Expect:
+      - !!binary |
+        MTAwLWNvbnRpbnVl
+      Transfer-Encoding:
+      - !!binary |
+        Y2h1bmtlZA==
+      User-Agent:
+      - User-Agent
+      X-Amz-Content-SHA256:
+      - X-Amz-Content-SHA256
+      X-Amz-Date:
+      - X-Amz-Date
+      X-Amz-Decoded-Content-Length:
+      - !!binary |
+        MTE=
+      X-Amz-Trailer:
+      - !!binary |
+        eC1hbXotY2hlY2tzdW0tY3JjMzI=
+      amz-sdk-invocation-id:
+      - amz-sdk-invocation-id
+      amz-sdk-request:
+      - amz-sdk-request
+      authorization:
+      - DUMMY
+      x-amz-sdk-checksum-algorithm:
+      - !!binary |
+        Q1JDMzI=
+    method: PUT
+    uri: https://test-buket-maksonik.s3.eu-north-1.amazonaws.com/tests/file.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      Date:
+      - Sun, 15 Jun 2025 16:30:00 GMT
+      ETag:
+      - '"26e078b87fdaa3206ab8bf63a6096c07"'
+      Server:
+      - AmazonS3
+      x-amz-checksum-crc32:
+      - akemMA==
+      x-amz-checksum-type:
+      - FULL_OBJECT
+      x-amz-id-2:
+      - RLzecfYx8dbeUehYNNJ4xmPynrZfSlLRDwTOejuZJF8pDZV4ONqsIzetWcufrQj6hdFVPbQCVc4=
+      x-amz-request-id:
+      - B3DQRJQ5VC2DVXRS
+      x-amz-server-side-encryption:
+      - AES256
+    status:
+      code: 200
+      message: OK
+version: 1
