@@ -8,6 +8,7 @@ from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY
 from sfm.core.constants import FILE_TYPE_IS_NOT_ALLOWED
 from sfm.core.integrations.s3.base_service import AbstractStorageService
 from sfm.core.integrations.s3.schemas import DownloadLinkResponse, FileResponse, ListFilesResponse
+from sfm.core.logger import logger
 from sfm.core.settings import Settings
 from sfm.core.utils.async_cache import async_cache
 
@@ -49,6 +50,8 @@ class S3AWSService(AbstractStorageService):
                     type=item["Key"].split(".")[-1] if "." in item["Key"] else "unknown",
                 ),
             )
+
+        logger.info(f"Got list of files in directory {prefix}")
         return ListFilesResponse(
             files=files,
             is_truncated=page.get("IsTruncated", False),
@@ -56,17 +59,24 @@ class S3AWSService(AbstractStorageService):
         )
 
     async def upload_file(self, prefix: str, file: UploadFile) -> None:
+        logger.info(f"Uploading file in directory {prefix}")
         ext = file.filename.rsplit(".", 1)[-1].lower()
 
         if ext not in self.allowed_file_types:
+            logger.info(f"Unsupported file type: {ext}")
             raise HTTPException(
                 status_code=HTTP_422_UNPROCESSABLE_ENTITY,
                 detail=FILE_TYPE_IS_NOT_ALLOWED.format(ext=ext, allowed_file_types=self.allowed_file_types),
             )
-        return self.client.upload_fileobj(file.file, Bucket=self.bucket, Key=f"{prefix}/{file.filename}")
+
+        response = self.client.upload_fileobj(file.file, Bucket=self.bucket, Key=f"{prefix}/{file.filename}")
+        logger.info(f"Uploaded file {file.filename}")
+        return response
 
     async def delete_file(self, prefix: str, filename: str) -> None:
-        return self.client.delete_object(Bucket=self.bucket, Key=f"{prefix}/{filename}")
+        response = self.client.delete_object(Bucket=self.bucket, Key=f"{prefix}/{filename}")
+        logger.info(f"Deleted file in directory {prefix}/{filename}")
+        return response
 
     async def get_link_download_file(self, prefix: str, filename: str) -> DownloadLinkResponse:
         url = self.client.generate_presigned_url(
@@ -78,6 +88,7 @@ class S3AWSService(AbstractStorageService):
             },
             ExpiresIn=3600,
         )
+        logger.info(f"Generate url for download of file {prefix}/{filename}")
         return DownloadLinkResponse(
             download_url=url,
             expires_at=datetime.now(tz=UTC) + timedelta(seconds=3600),

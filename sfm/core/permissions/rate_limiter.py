@@ -5,6 +5,7 @@ from fastapi import HTTPException, Request
 from starlette.status import HTTP_429_TOO_MANY_REQUESTS
 
 from sfm.core.constants import TOO_MANY_REQUESTS_MESSAGE
+from sfm.core.logger import logger
 
 _request_logs: dict[str, list[datetime]] = defaultdict(list)
 
@@ -28,6 +29,7 @@ async def check_rate_limit(request: Request) -> None:
     _request_logs[ip] = recent
 
     if len(recent) >= RATE_LIMIT:
+        logger.warning(f"Too many requests from {ip}")
         raise HTTPException(status_code=HTTP_429_TOO_MANY_REQUESTS, detail=TOO_MANY_REQUESTS_MESSAGE)
 
     _request_logs[ip].append(now)
