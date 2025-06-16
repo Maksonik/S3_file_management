@@ -6,6 +6,7 @@ from starlette.status import HTTP_429_TOO_MANY_REQUESTS
 
 from sfm.core.constants import TOO_MANY_REQUESTS_MESSAGE
 from sfm.core.logger import logger
+from sfm.core.mixins.metrics import MixinMetrics
 
 _request_logs: dict[str, list[datetime]] = defaultdict(list)
 
@@ -30,6 +31,7 @@ async def check_rate_limit(request: Request) -> None:
 
     if len(recent) >= RATE_LIMIT:
         logger.warning(f"Too many requests from {ip}")
+        MixinMetrics().count_type_error(status_code=HTTP_429_TOO_MANY_REQUESTS)
         raise HTTPException(status_code=HTTP_429_TOO_MANY_REQUESTS, detail=TOO_MANY_REQUESTS_MESSAGE)
 
     _request_logs[ip].append(now)

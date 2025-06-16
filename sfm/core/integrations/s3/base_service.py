@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from fastapi import File
+from fastapi import UploadFile
 
 from sfm.core.integrations.s3.schemas import DownloadLinkResponse, ListFilesResponse
 
@@ -24,7 +24,7 @@ class AbstractStorageService(ABC):
         """
 
     @abstractmethod
-    async def upload_file(self, prefix: str, file: File) -> None:
+    async def upload_file(self, prefix: str, file: UploadFile) -> None:
         """
         Upload a file to the specified directory in the S3 bucket.
 
