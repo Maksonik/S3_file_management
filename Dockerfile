@@ -27,8 +27,7 @@ RUN true \
     && python3 -m venv /venv \
     && . /venv/bin/activate \
     && python3 -m pip install --no-cache-dir -U pip \
-    && python3 -m pip install --no-cache-dir -U poetry==$POETRY_VERSION poetry-plugin-export \
-    && poetry config warnings.export
+    && python3 -m pip install --no-cache-dir -U poetry==$POETRY_VERSION poetry-plugin-export
 
 ENV PATH=/venv/bin:$PATH \
     VIRTUAL_ENV=/venv
