@@ -15,7 +15,7 @@ class MixinMetrics:
 
     @staticmethod
     def count_upload_size_file(file: UploadFile) -> None:
-        FILE_UPLOAD_SIZE.observe(file.size)
+        FILE_UPLOAD_SIZE.observe(file.size or 0)
 
     def count_download_size_file(self, prefix: str, filename: str) -> None:
         response = self.client.head_object(Bucket=self.bucket, Key=f"{prefix}/{filename}")

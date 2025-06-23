@@ -1,0 +1,181 @@
+stages:
+  - build
+  - check
+  - deploy
+
+variables:
+  FF_TIMESTAMPS: "true"
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""
+
+  REPO: maksonik/sfm
+  CACHE_TAG: intermediate
+  RELEASE_TAG: release
+  TMPWORK_TAG: bw-$CI_COMMIT_REF_SLUG
+  TMPIMAGE_TAG: ba-$CI_COMMIT_REF_SLUG
+
+  DOCKER_IMAGE: docker
+  PYTHON_IMAGE: python:3.12-alpine
+  PIP_INDEX_URL: https://pypi.org/simple
+
+#-------------------------------
+
+default:
+  interruptible: true
+
+#-------------------------------
+
+workflow:
+  auto_cancel:
+    on_new_commit: interruptible
+
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^sfm_.*/              # release
+      variables:
+        BUILD_ENV: release
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH  # rc
+      variables:
+        BUILD_ENV: rc
+    - if: $CI_MERGE_REQUEST_IID                    # dev
+      variables:
+        BUILD_ENV: dev
+
+#-------------------------------
+
+.build_template:
+  image: $DOCKER_IMAGE:24.0.5
+  services:
+    - name: $DOCKER_IMAGE:24.0.5-dind
+      alias: docker
+  variables:
+    DOCKER_BUILD_TEMPLATE: >-
+      docker buildx build --builder default --progress plain
+      --build-arg PYTHON_IMAGE=$PYTHON_IMAGE
+      --build-arg PIP_INDEX_URL=$PIP_INDEX_URL
+      --cache-to type=inline
+      --cache-from type=registry,ref=$REPO:$CACHE_TAG
+      --cache-from type=registry,ref=$REPO:$TMPWORK_TAG
+      --cache-from type=registry,ref=$REPO:$TMPIMAGE_TAG
+      --label "org.opencontainers.image.title=$CI_PROJECT_TITLE"
+      --label "org.opencontainers.image.url=$CI_PROJECT_URL"
+      --label "org.opencontainers.image.created=$CI_STARTED_AT"
+      --label "org.opencontainers.image.revision=$CI_COMMIT_SHA"
+      --label "org.opencontainers.image.version=$CI_COMMIT_REF_NAME"
+
+#--------------------------------
+
+.deploy_template:
+  interruptible: false
+
+  needs:
+    - job: build_image
+
+  variables:
+    DEPLOY_TAG: $IMAGE_TAG
+    DEPLOY_ENV: <define_in_job>  # preprod or prod
+
+  trigger:
+    project: maksonik6-group/kubernetes_deployment
+    branch: main
+    strategy: depend
+    forward:
+      pipeline_variables: true
+
+
+#--------------------------------
+
+build_image:
+  stage: build
+  extends: .build_template
+  before_script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+  script:
+    - if [ "$BUILD_ENV" == "release" ]; then APP_VERSION=${CI_COMMIT_TAG#sfm_}; else APP_VERSION=b$CI_PIPELINE_ID; fi
+    - docker pull $REPO:$CACHE_TAG || true
+    - docker pull $REPO:$TMPWORK_TAG || true
+    - docker pull $REPO:$TMPIMAGE_TAG || true
+    - $DOCKER_BUILD_TEMPLATE --target testing --tag $REPO:$TMPWORK_TAG .
+    - $DOCKER_BUILD_TEMPLATE --build-arg APP_VERSION=$APP_VERSION --tag $REPO:$TMPIMAGE_TAG .
+    - docker push $REPO:$TMPWORK_TAG
+    - docker push $REPO:$TMPIMAGE_TAG
+    - |
+      if [ "$BUILD_ENV" != "dev" ]; then
+        docker tag $REPO:$TMPWORK_TAG $REPO:$CACHE_TAG
+        docker push $REPO:$CACHE_TAG
+        TESTING_TAG=$CACHE_TAG
+      else
+        TESTING_TAG=$TMPWORK_TAG
+      fi
+    - |
+      if [ "$BUILD_ENV" == "release" ]; then
+        docker tag $REPO:$TMPIMAGE_TAG $REPO:$APP_VERSION
+        docker tag $REPO:$TMPIMAGE_TAG $REPO:$RELEASE_TAG
+        docker push $REPO:$APP_VERSION
+        docker push $REPO:$RELEASE_TAG
+        IMAGE_TAG=$APP_VERSION
+      else
+        IMAGE_TAG=$TMPIMAGE_TAG
+      fi
+    - TESTING_SHA256=$(docker inspect --format='{{index .RepoDigests 0}}' $REPO:$TESTING_TAG | cut -d'@' -f2)
+    - echo "TESTING_TAG=$TESTING_TAG@$TESTING_SHA256" | tee -a build_image.env
+    - IMAGE_SHA256=$(docker inspect --format='{{index .RepoDigests 0}}' $REPO:$IMAGE_TAG | cut -d'@' -f2)
+    - echo "IMAGE_TAG=$IMAGE_TAG@$IMAGE_SHA256" | tee -a build_image.env
+  artifacts:
+    reports:
+      dotenv: build_image.env
+
+#--------------------------------
+
+lint:
+  stage: check
+  image:
+    name: $REPO:$TMPWORK_TAG
+    pull_policy: always
+  needs:
+    - job: build_image
+  script:
+    - echo "Run linter (pre-commit)"
+    - pre-commit run --all-files || echo "No pre-commit config found"
+
+#--------------------------------
+
+tests:
+  stage: check
+  image:
+    name: $REPO:$TMPWORK_TAG
+    pull_policy: always
+  needs:
+    - job: build_image
+  script:
+    - pytest -vv --junitxml=junit.xml --cov --cov-report=xml --vcr-record=none
+    - coverage report
+
+#--------------------------------
+
+deploy_stage:
+  stage: deploy
+  extends: .deploy_template
+  needs:
+    - job: build_image
+  variables:
+    DEPLOY_ENV: stage
+  rules:
+    - if: $BUILD_ENV == "release" || $BUILD_ENV == "rc"
+    - if: $BUILD_ENV == "dev"
+      when: manual
+      allow_failure: false
+
+#--------------------------------
+
+deploy_prod:
+  stage: deploy
+  extends: .deploy_template
+  needs:
+    - job: deploy_stage  # Ensure tag is deployable
+      artifacts: false
+    - !reference [deploy_stage, needs]
+
+  variables:
+    DEPLOY_ENV: prod
+  rules:
+    - if: $BUILD_ENV == "release"

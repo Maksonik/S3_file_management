@@ -1,6 +1,6 @@
 ARG PLATFORM=linux/amd64
 ARG PYTHON_IMAGE=python
-FROM --platform=$PLATFORM $PYTHON_IMAGE:3.12-alpine AS intermediate
+FROM --platform=$PLATFORM $PYTHON_IMAGE AS intermediate
 
 RUN addgroup -S app && adduser -s /bin/bash -SG app app
 
@@ -37,8 +37,7 @@ COPY pyproject.toml poetry.lock /tmp/
 RUN cd /tmp \
     && poetry export --only=main --without-urls --format requirements.txt --output requirements.txt \
     && rm pyproject.toml poetry.lock \
-    && python3 -m pip install --no-cache-dir -U -r requirements.txt \
-    && rm requirements.txt
+    && python3 -m pip install --no-cache-dir -U -r requirements.txt
 
 
 FROM intermediate AS testing
@@ -53,8 +52,7 @@ COPY pyproject.toml poetry.lock /tmp/
 RUN cd /tmp \
     && poetry export --only=dev --without-urls --format requirements.txt --output requirements.txt \
     && rm pyproject.toml poetry.lock \
-    && python3 -m pip install --no-cache-dir -U -r requirements.txt \
-    && rm requirements.txt
+    && python3 -m pip install --no-cache-dir -U -r requirements.txt
 
 
 FROM intermediate AS release

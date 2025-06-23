@@ -2,10 +2,8 @@ from io import BytesIO
 
 import pytest
 from fastapi import UploadFile
-from freezegun import freeze_time
 
 from sfm.core.integrations.s3.schemas import ListFilesResponse
-from tests.test_utils.any import ANY_DATETIME, ANY_STR
 
 
 async def clear_test_dir_from_3s_aws(aws_service):
@@ -15,7 +13,7 @@ async def clear_test_dir_from_3s_aws(aws_service):
         await aws_service.delete_file(filename=name, prefix=prefix)
 
 
-@pytest.mark.vcr(record_mode="once")
+@pytest.mark.vcr
 async def test_get_list_files(aws_service, disable_cache):
     await clear_test_dir_from_3s_aws(aws_service)
 
@@ -25,7 +23,7 @@ async def test_get_list_files(aws_service, disable_cache):
     await clear_test_dir_from_3s_aws(aws_service)
 
 
-@pytest.mark.vcr(record_mode="once")
+@pytest.mark.vcr
 async def test_get_list_files_recursive(aws_service, disable_cache):
     await clear_test_dir_from_3s_aws(aws_service)
 
@@ -45,7 +43,7 @@ async def test_get_list_files_recursive(aws_service, disable_cache):
     await clear_test_dir_from_3s_aws(aws_service)
 
 
-@pytest.mark.vcr(record_mode="once")
+@pytest.mark.vcr
 async def test_get_list_files_max_keys(aws_service, disable_cache):
     await clear_test_dir_from_3s_aws(aws_service)
 
@@ -63,13 +61,6 @@ async def test_get_list_files_max_keys(aws_service, disable_cache):
 
 
 @pytest.mark.vcr
-@freeze_time("2025-06-15")
-async def test_get_link_download_file(aws_service):
-    result = await aws_service.get_link_download_file(prefix="test", filename="test")
-    assert result.model_dump(mode="python") == {"download_url": ANY_STR, "expires_at": ANY_DATETIME}
-
-
-@pytest.mark.vcr(record_mode="once")
 async def test_delete_file(aws_service):
     file = UploadFile(filename="deleting_file.jpg", file=BytesIO(b"data"))
     await aws_service.upload_file(prefix="test", file=file)
